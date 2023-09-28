@@ -1,6 +1,14 @@
 # Prerequisites
 *.d
-build
+.DS_Store
+build/*
+cmake_install.cmake
+CMakeCache.txt
+CMakefile.txt
+.clangd
+compile_commands.json
+.dir-locals.el
+.envrc
 # Compiled Object files
 *.slo
 *.lo

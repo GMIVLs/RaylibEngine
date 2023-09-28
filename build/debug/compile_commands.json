@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/Users/gmbp/Desktop/devCode/cppDev/RaylibEngine/build/debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -I/Users/gmbp/vcpkg/packages/raylib_arm64-osx/include -g -Wall -Wextra -g -lGL -lm -lpthread -ldl -lX11  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -o CMakeFiles/main.dir/src/main.cpp.o -c /Users/gmbp/Desktop/devCode/cppDev/RaylibEngine/src/main.cpp",
-  "file": "/Users/gmbp/Desktop/devCode/cppDev/RaylibEngine/src/main.cpp",
-  "output": "CMakeFiles/main.dir/src/main.cpp.o"
-}
-]
