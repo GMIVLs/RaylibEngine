@@ -10,6 +10,7 @@ CMakefile.txt
 compile_commands.json
 .dir-locals.el
 .envrc
+.cache
 # Compiled Object files
 *.slo
 *.lo
