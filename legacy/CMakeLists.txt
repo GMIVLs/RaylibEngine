@@ -20,8 +20,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY
     ${CMAKE_SOURCE_DIR}/build/${CMAKE_BUILD_TYPE})
 
 # Include directories
-include_directories($ENV{PROJECT_DIR}/vcpkg_installed/arm64-osx/include/)
-link_directories($ENV{PROJECT_DIR}/vcpkg_installed/arm64-osx/lib/)
+include_directories($ENV{ROOT_HOME}/vcpkg/packages/raylib_arm64-osx/include/)
+link_directories($ENV{ROOT_HOME}/vcpkg/packages/raylib_arm64-osx/lib/)
 
 # Create the executable
 add_executable(main ${SOURCES})
@@ -37,7 +37,7 @@ find_library(IOKIT_LIBRARY IOKit)
 
 # Headers [optional]
 target_include_directories(
-  main PRIVATE $ENV{PROJECT_DIR}/vcpkg_installed/arm64-osx/include/)
+  main PRIVATE $ENV{ROOT_HOME}/vcpkg/packages/raylib_arm64-osx/include/)
 # Link the libraries
 target_link_libraries(
   main PRIVATE raylib ${COREFOUNDATION_LIBRARY} ${COREGRAPHICS_LIBRARY}

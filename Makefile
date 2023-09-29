@@ -14,8 +14,6 @@ OUTPUT = build/debug/main
 # Phony target since 'runcli' isn't a file
 .PHONY: all debug release run
 
-
-
 all: debug
 
 debug: link_compile_commands
@@ -34,4 +32,7 @@ link_compile_commands:
 		rm -f compile_commands.json; \
 	fi
 	ln -s build/debug/compile_commands.json compile_commands.json
+
+
+
 
