@@ -32,8 +32,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY
 # Necessary libraries for building for macOS M1 architecture
 # find_library(COREFOUNDATION_LIBRARY CoreFoundation)
 # find_library(COREGRAPHICS_LIBRARY CoreGraphics)
-find_library(APPKIT_LIBRARY AppKit)
-find_library(IOKIT_LIBRARY IOKit)
+#find_library(APPKIT_LIBRARY AppKit)
+#find_library(IOKIT_LIBRARY IOKit)
 
 # Headers [optional]
 target_include_directories(
@@ -48,7 +48,7 @@ target_link_libraries(
 # Set C++ standard (optional)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS_DEBUG
-    "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -g -lGL -lm -lpthread -ldl -lX11 " # -lrt
+    "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -g -lGL -lm -lpthread -ldl -lX11 -lglfw3 -framework Cocoa -framework IOKit -framework CoreFoundation " # -lrt
 )
 # You can add (-Werror), but it will make the complier more restrictive.
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
