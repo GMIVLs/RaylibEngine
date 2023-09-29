@@ -31,19 +31,18 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY
     ${CMAKE_SOURCE_DIR}/build/${CMAKE_BUILD_TYPE})
 # Necessary libraries for building for macOS M1 architecture
 # find_library(COREFOUNDATION_LIBRARY CoreFoundation)
-# find_library(COREGRAPHICS_LIBRARY CoreGraphics)
-#find_library(APPKIT_LIBRARY AppKit)
-#find_library(IOKIT_LIBRARY IOKit)
+# find_library(COREGRAPHICS_LIBRARY CoreGraphics) find_library(APPKIT_LIBRARY
+# AppKit) find_library(IOKIT_LIBRARY IOKit)
 
 # Headers [optional]
 target_include_directories(
   main PRIVATE $ENV{PROJECT_DIR}/vcpkg_installed/arm64-osx/include/)
 # Link the libraries
-target_link_libraries(
-  main PRIVATE raylib ${COREFOUNDATION_LIBRARY} ${COREGRAPHICS_LIBRARY}
-               ${APPKIT_LIBRARY} ${IOKIT_LIBRARY} raylib) # notice raylib has to
-                                                          # be at the end, since
-                                                          # it needs APPKIT
+target_link_libraries(main PRIVATE raylib)
+# ${COREFOUNDATION_LIBRARY}
+# ${COREGRAPHICS_LIBRARY}
+# ${APPKIT_LIBRARY} ${IOKIT_LIBRARY} ) # notice raylib has to be at the end,
+# since it needs APPKIT
 
 # Set C++ standard (optional)
 set(CMAKE_CXX_STANDARD 17)
