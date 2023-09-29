@@ -34,5 +34,18 @@ link_compile_commands:
 	ln -s build/debug/compile_commands.json compile_commands.json
 
 
+help:
+	@echo "\033[35m ********************************************************\033[0m"
+	@echo ""
+	@echo "\033[33m    █▀█ ▄▀█ █▄█ █░░ █ █▄▄ █▀▀ █▄░█ █▀▀ █ █▄░█ █▀▀  \033[0m"
+	@echo "\033[33m    █▀▄ █▀█ ░█░ █▄▄ █ █▄█ ██▄ █░▀█ █▄█ █ █░▀█ ██▄  \033[0m"
+	@echo ""
+	@echo "\033[35m ********************************************************\033[0m"
+	@echo "Available commands:"
+	@echo "\033[32m   make all      \033[0m   - equivalent to make debug"
+	@echo "\033[32m   make debug    \033[0m   - build the project in Debug mode"
+	@echo "\033[32m   make release  \033[0m   - build the project in Release mode"
+	@echo "\033[32m   make help     \033[0m   - show this help message"
+	@echo "\033[35m ********************************************************\033[0m"
 
 
