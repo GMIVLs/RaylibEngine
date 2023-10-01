@@ -50,4 +50,4 @@ set(CMAKE_CXX_FLAGS_DEBUG
     "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -g -lGL -lm -lpthread -ldl -lX11 -lglfw3 -framework Cocoa -framework IOKit -framework CoreFoundation " # -lrt
 )
 # You can add (-Werror), but it will make the complier more restrictive.
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -lGL -lm -lpthread -ldl -lX11 -lglfw3 -framework Cocoa -framework IOKit -framework CoreFoundation")
