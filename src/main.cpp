@@ -1,8 +1,7 @@
 /*******************************************************************************************
  *
  *   raylib [core] example - Basic window
- *
- *   Welcome to raylib!
+ * *   Welcome to raylib!
  *
  *   To test examples, just press F6 and execute raylib_compile_execute script
  *   Note that compiled executable is placed in the same folder as .c file
@@ -28,7 +27,6 @@ int main() {
 
   // Initialize the window
   InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-
   // Set target frames per second
   SetTargetFPS(60);
 
