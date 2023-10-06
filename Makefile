@@ -12,6 +12,7 @@ BINARY_NAME = main
 all: debug
 
 # You can also pass  -DCMAKE_CXX_COMPILER=clang++, to replace CXX in CMakeList.txt
+# Debug here uses generator: -G "Unix Makefiles (which we don't need to specifiy )
 debug: link_compile_commands
 	cmake  -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake \
 		-S . -B build/debug
@@ -25,6 +26,16 @@ release: link_compile_commands
 	$(MAKE) -j${NUMBER_CORES} -C build/release
 	./build/release/$(BINARY_NAME)
 
+# Debug here uses generator: -G "Ninja (which we uses ninja alternative to make )
+debug_using_ninja: link_compile_commands
+	cmake -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=/opt/homebrew/bin/ninja" \
+		-DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake \
+		-G Ninja -S /Users/gmbp/Desktop/devCode/cppDev/RaylibEngine \
+		-B /Users/gmbp/Desktop/devCode/cppDev/RaylibEngine/build/debug
+	/opt/homebrew/bin/ninja -j${NUMBER_CORES} -C build/debug
+	./build/debug/$(BINARY_NAME)
+
+
 # For the clangd language server integration
 link_compile_commands:
 	@if [ -L compile_commands.json ]; then \
@@ -37,7 +48,7 @@ clean:
 	@rm -rf vcpkg-manifest-install.log \
 		vcpkg_installed CMakeCache.txt \
 		cmake_install.cmake CMakeFiles \
-		compile_commands.json
+		compile_commands.json .idea cmake-build-debug
 
 help:
 	@echo "\033[35m ********************************************************\033[0m"
