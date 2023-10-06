@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.27)
 # Define your project and languages used
 project(
   RaylibEngine
@@ -8,6 +8,11 @@ project(
 # Specify the required C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# Enable the compile_commands.json generation
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Recursive find all files and add them to the project
+file(GLOB_RECURSE SOURCES "src/*.cpp")
 
 # add_subdirectory(vcpkg_installed/arm64-osx) Set the build type if not provided
 if(NOT CMAKE_BUILD_TYPE)
@@ -16,20 +21,20 @@ if(NOT CMAKE_BUILD_TYPE)
       CACHE STRING "Choose the type of build (Debug or Release)" FORCE)
 endif()
 
-# Recursive find all files and add them to the project
-file(GLOB_RECURSE SOURCES "src/*.cpp")
-
-# Enable the compile_commands.json generation
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# Include the vcpkg toolchain file
+if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+  set(CMAKE_TOOLCHAIN_FILE
+      "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+      CACHE STRING "Defined our vcpkg library ... ")
+endif()
 
 # Instead of using vcpkg's toolchain file for finding packages, we'll manually
 # specify paths to headers and libraries.
 
-# Manually specify raylib's header and library paths
-include_directories(${CMAKE_SOURCE_DIR}/vcpkg_installed/arm64-osx/include/)
-link_directories(${CMAKE_SOURCE_DIR}/vcpkg_installed/arm64-osx/lib/)
+# Finding the packages base on globally installed libraries at ~/vcpkg/installed
+find_package(glfw3 CONFIG REQUIRED)
+find_package(raylib CONFIG REQUIRED)
 
-# Define sources for your project
 set(SOURCES src/main.cpp) # Adjust this if you have other source files
 
 # Add the executable target add_executable(${PROJECT_NAME} ${SOURCES})
@@ -39,21 +44,26 @@ add_executable(main ${SOURCES})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY
     ${CMAKE_SOURCE_DIR}/build/${CMAKE_BUILD_TYPE}) # Link the libraries to the
                                                    # target
-
-# Enable the compile_commands.json generation
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
 if(APPLE)
-  # Headers [optional]
-  target_include_directories(main PRIVATE) # Link the libraries
-  target_link_libraries(main PRIVATE raylib)
-  set(CMAKE_CXX_FLAGS_DEBUG
-      "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -g -lGL -lm -lpthread -ldl -lX11 -lglfw3 -framework Cocoa -framework IOKit -framework CoreFoundation "
-  )
+  # Adding Sanitize
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address")
+  # Headers [optional] target_include_directories(main PRIVATE glfw raylib) Link
+  # the libraries
+  target_link_libraries(main PRIVATE glfw raylib)
 
-  set(CMAKE_CXX_FLAGS_RELEASE
-      "${CMAKE_CXX_FLAGS_RELEASE} -O3 -lGL -lm -lpthread -ldl -lX11 -lglfw3 -framework Cocoa -framework IOKit -framework CoreFoundation"
+  set(CMAKE_CXX_FLAGS_DEBUG
+      "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -g -lGL -lm -lpthread -ldl -lX11 " # -lrt
+                                                                                 # -lglfw3
+                                                                                 # -ldl -lX11
+                                                                                 # -framework
+                                                                                 # Cocoa
+                                                                                 # -framework
+                                                                                 # IOKit
+                                                                                 # -Werror
   )
+  # You can add (-Werror), but it will make the complier more restrictive.
+  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+
 endif()
-#
