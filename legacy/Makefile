@@ -18,7 +18,7 @@ all: debug
 
 # You can also pass  -DCMAKE_CXX_COMPILER=clang++, to replace CXX in CMakeList.txt
 debug: link_compile_commands
-	cmake -DCMAKE_BUILD_TYPE=Debug -S . -B build/debug
+	cmake  -DCMAKE_BUILD_TYPE=Debug -S . -B build/debug
 	$(MAKE) -j$(NUMBER_CORES) -C build/debug
 	./build/debug/$(BINARY_NAME)
 
@@ -32,10 +32,7 @@ link_compile_commands:
 	if [ -L compile_commands.json ]; then \
 		rm -f compile_commands.json; \
 	fi
-	# Building with make
 	ln -s build/debug/compile_commands.json compile_commands.json
-	# Build by vcpkg
-	#ln -s cmake-build-debug/compile_commands.json compile_commands.json
 
 
 help:

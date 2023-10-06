@@ -37,7 +37,7 @@ int main() {
   // Colors
   Color rayWhite = {245, 245, 245, 255};
   Color lightGray = {200, 200, 200, 255};
-  Color red = {10, 111, 121, 255};
+  Color lightGreen = {10, 111, 121, 255};
 
   // Main game loop
   while (!WindowShouldClose()) { // Continue until window close button or ESC
@@ -47,7 +47,7 @@ int main() {
     {
       DrawText("Every 2 seconds a new random value is generated:", 130, 100, 20,
                lightGray);
-      DrawText(TextFormat("%i", randValue), 360, 180, 80, red);
+      DrawText(TextFormat("%i", randValue), 360, 180, 80, lightGreen);
     }
 
     framesCounter++;

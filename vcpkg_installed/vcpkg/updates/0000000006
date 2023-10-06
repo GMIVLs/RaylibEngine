@@ -1,0 +1,10 @@
+Package: raylib
+Version: 4.5.0
+Port-Version: 2
+Depends: glfw3, vcpkg-cmake, vcpkg-cmake-config
+Architecture: arm64-osx
+Multi-Arch: same
+Abi: cbe5714a4550b949d8a33792d5653b5aa66fb016ad748ec81240667bbbfb7f7b
+Description: A simple and easy-to-use library to enjoy videogames programming
+Default-Features: use-audio
+Status: install ok half-installed

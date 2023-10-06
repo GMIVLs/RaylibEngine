@@ -40,7 +40,7 @@ target_include_directories(
   main PRIVATE $ENV{ROOT_HOME}/vcpkg/packages/raylib_arm64-osx/include/)
 # Link the libraries
 target_link_libraries(
-  main PRIVATE raylib ${COREFOUNDATION_LIBRARY} ${COREGRAPHICS_LIBRARY}
+  main PRIVATE  ${COREFOUNDATION_LIBRARY} ${COREGRAPHICS_LIBRARY}
                ${APPKIT_LIBRARY} ${IOKIT_LIBRARY} raylib) # notice raylib has to
                                                           # be at the end, since
                                                           # it needs APPKIT
